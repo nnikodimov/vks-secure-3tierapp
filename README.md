@@ -1,6 +1,6 @@
-# explore-2026
+# Secure VKS 3tierapp 
 
-NSX-T policies for the 3tierapp workload. The [terraform/](terraform/) folder
+vDefend policies for the 3tierapp workload. The [terraform/](terraform/) folder
 is the Terraform root module - it configures the single `nsxt` provider
 instance ([terraform/provider.tf](terraform/provider.tf)) and calls three
 child modules, split out so each can be reasoned about and applied
