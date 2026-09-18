@@ -1,12 +1,12 @@
 # explore-2026
 
-NSX-T policies for the alpha workload. The [terraform/](terraform/) folder
+NSX-T policies for the 3tierapp workload. The [terraform/](terraform/) folder
 is the Terraform root module - it configures the single `nsxt` provider
 instance ([terraform/provider.tf](terraform/provider.tf)) and calls three
 child modules, split out so each can be reasoned about and applied
 independently:
 
-- [terraform/baseline/](terraform/baseline/) - creates the ACNP and alpha-db
+- [terraform/baseline/](terraform/baseline/) - creates the ACNP and 3tierapp-db
   parent policies, their groups, the Antrea cluster attachment, and locks
   both policies down with a default-deny DROP rule. Applied first.
 - [terraform/antrea-policy/](terraform/antrea-policy/) - amends the ACNP
