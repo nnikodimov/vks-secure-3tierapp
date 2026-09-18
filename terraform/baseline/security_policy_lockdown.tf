@@ -1,4 +1,4 @@
-# Baseline: creates the ACNP and alpha-db parent policies (plus their groups
+# Baseline: creates the ACNP and 3tierapp-db parent policies (plus their groups
 # and, for the ACNP, its Antrea cluster attachment), and locks both down with
 # a default-deny DROP rule. ../antrea-policy and ../database-policy are
 # applied afterwards, amending their ALLOW rules onto these same policies via
@@ -11,8 +11,8 @@
 # independent policy_path to attach to.
 
 resource "nsxt_policy_parent_security_policy" "tierapp" {
-  display_name    = "alpha_vks_policy"
-  description     = "alpha_vks_policy"
+  display_name    = "3tierapp_vks_policy"
+  description     = "3tierapp_vks_policy"
   category        = "Application"
   stateful        = true
   tcp_strict      = true
@@ -23,20 +23,20 @@ resource "nsxt_policy_parent_security_policy" "tierapp" {
 }
 
 resource "nsxt_policy_security_policy_container_cluster" "tierapp" {
-  display_name           = "alpha-cluster-span"
-  description            = "Antrea container cluster span for alpha_policy"
+  display_name           = "3tierapp-cluster-span"
+  description            = "Antrea container cluster span for 3tierapp_policy"
   policy_path            = nsxt_policy_parent_security_policy.tierapp.path
   container_cluster_path = data.nsxt_policy_container_cluster.tierapp.path
 }
 
 # Priority order matches the export's ascending sequenceNumber: this DROP
-# rule (499999) is the last ACNP rule - allow_alpha_frontend (249999) and
-# allow_alpha_frontend_to_backend (374999) in ../antrea-policy are evaluated
+# rule (499999) is the last ACNP rule - allow_tierapp_frontend (249999) and
+# allow_tierapp_frontend_to_backend (374999) in ../antrea-policy are evaluated
 # first.
 
-resource "nsxt_policy_security_policy_rule" "lockdown_alpha_namespace" {
-  display_name    = "lockdown_alpha_namespace"
-  description     = "lockdown alpha namespace"
+resource "nsxt_policy_security_policy_rule" "lockdown_tierapp_namespace" {
+  display_name    = "lockdown_3tierapp_namespace"
+  description     = "lockdown 3tierapp namespace"
   policy_path     = nsxt_policy_parent_security_policy.tierapp.path
   sequence_number = 666
   action          = "DROP"
@@ -45,8 +45,8 @@ resource "nsxt_policy_security_policy_rule" "lockdown_alpha_namespace" {
 }
 
 resource "nsxt_policy_parent_security_policy" "tierapp_db" {
-  display_name    = "alpha_db_policy"
-  description     = "alpha_db policy"
+  display_name    = "3tierapp_db_policy"
+  description     = "3tierapp_db policy"
   category        = "Application"
   stateful        = true
   tcp_strict      = true
@@ -57,7 +57,7 @@ resource "nsxt_policy_parent_security_policy" "tierapp_db" {
 }
 
 # Priority order matches the export's ascending sequenceNumber: this DROP
-# rule (749999) comes after allow_alpha_egress_to_database (499999) in
+# rule (749999) comes after allow_tierapp_egress_to_database (499999) in
 # ../database-policy.
 
 resource "nsxt_policy_security_policy_rule" "lockdown_database" {

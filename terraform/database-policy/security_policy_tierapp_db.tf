@@ -1,13 +1,13 @@
-# DFW ALLOW rule for the alpha database tier, amended onto the parent policy
+# DFW ALLOW rule for the 3tierapp database tier, amended onto the parent policy
 # created in ../baseline (which also owns the lockdown DROP rule).
 #
 # Priority order matches the export's ascending sequenceNumber: this allow
 # rule (499999) is evaluated before the lockdown_database default-deny
 # (749999) in ../baseline.
 
-resource "nsxt_policy_security_policy_rule" "allow_alpha_egress_to_database" {
-  display_name       = "allow_alpha_egress_to_database"
-  description        = "allow alpha egress to database"
+resource "nsxt_policy_security_policy_rule" "allow_tierapp_egress_to_database" {
+  display_name       = "allow_3tierapp_egress_to_database"
+  description        = "allow 3tierapp egress to database"
   policy_path        = var.policy_path
   sequence_number    = 1
   action             = "ALLOW"

@@ -9,10 +9,10 @@
 # by the ALLOW rules live alongside those rules in ../antrea-policy and
 # ../database-policy.
 
-# Whole "alpha" Kubernetes namespace - used as the ANTREA policy's default-deny scope.
+# Whole "3tierapp" Kubernetes namespace - used as the ANTREA policy's default-deny scope.
 resource "nsxt_policy_group" "tierapp_ns" {
-  display_name = "alpha-ns"
-  description  = "PLACEHOLDER criteria - verify against real NSX group. All members of the alpha Kubernetes namespace."
+  display_name = "3tierapp-ns"
+  description  = "PLACEHOLDER criteria - verify against real NSX group. All members of the 3tierapp Kubernetes namespace."
   group_type   = "ANTREA"
 
   criteria {
@@ -20,22 +20,22 @@ resource "nsxt_policy_group" "tierapp_ns" {
       key         = "Name"
       member_type = "Namespace"
       operator    = "EQUALS"
-      value       = "alpha"
+      value       = "3tierapp"
     }
   }
 }
 
 # VM-based database tier, matched by VM name.
 resource "nsxt_policy_group" "tierapp_db" {
-  display_name = "alpha-db"
-  description  = "PLACEHOLDER criteria - verify against real NSX group. alpha database VMs."
+  display_name = "3tierapp-db"
+  description  = "PLACEHOLDER criteria - verify against real NSX group. 3tierapp database VMs."
 
   criteria {
     condition {
       key         = "Name"
       member_type = "VirtualMachine"
       operator    = "EQUALS"
-      value       = "alpha-db"
+      value       = "3tierapp-db"
     }
   }
 }

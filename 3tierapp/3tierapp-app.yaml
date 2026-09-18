@@ -6,7 +6,7 @@ type: Opaque
 data:
   #api_url: <BASE64_ENCODED_IP:PORT_FOR_backend-app-service>
   #api_url: MTcyLjIwLjYzLjIwNzo1MDAw
-  api_url: YmFja2VuZC1hcHAtc2VydmljZS5hbHBoYS5zdmMudmtzMDEudmNmMDEuYW5zLmxhYjo1MDAw
+  api_url: YmFja2VuZC1hcHAtc2VydmljZS4zdGllcmFwcC5zdmMudmtzMDEudmNmMDEuYW5zLmxhYjo1MDAw
 
 ---
 apiVersion: apps/v1
@@ -134,14 +134,14 @@ spec:
 apiVersion: crd.antrea.io/v1beta1
 kind: Egress
 metadata:
-  name: alpha-egress
+  name: 3tierapp-egress
   labels:
     app: backend-app
 spec:
   appliedTo:
     namespaceSelector:
       matchLabels:
-        kubernetes.io/metadata.name: alpha
+        kubernetes.io/metadata.name: 3tierapp
     podSelector:
       matchLabels:
         app: backend-app
