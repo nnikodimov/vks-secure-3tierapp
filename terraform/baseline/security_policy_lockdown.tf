@@ -42,6 +42,8 @@ resource "nsxt_policy_security_policy_rule" "lockdown_tierapp_namespace" {
   action          = "DROP"
   direction       = "IN"
   scope           = [nsxt_policy_group.tierapp_ns.path]
+  logged          = true
+  log_label       = "3tierapp-acnp"
 }
 
 resource "nsxt_policy_parent_security_policy" "tierapp_db" {
@@ -68,4 +70,6 @@ resource "nsxt_policy_security_policy_rule" "lockdown_database" {
   sequence_number = 666
   action          = "DROP"
   direction       = "IN"
+  logged          = true
+  log_label       = "3tierapp-db"
 }
