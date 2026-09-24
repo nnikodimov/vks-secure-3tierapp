@@ -51,3 +51,15 @@ resource "nsxt_policy_group" "tierapp_backend" {
     }
   }
 }
+
+# IP-based group for the 3tierapp database.
+resource "nsxt_policy_group" "tierapp_db_ip" {
+  display_name = "3tierapp-db-ip"
+  description  = "3tierapp database IP."
+
+  criteria {
+    ipaddress_expression {
+      ip_addresses = ["172.16.30.100"]
+    }
+  }
+}

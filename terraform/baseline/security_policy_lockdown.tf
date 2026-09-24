@@ -40,7 +40,7 @@ resource "nsxt_policy_security_policy_rule" "lockdown_tierapp_namespace" {
   policy_path     = nsxt_policy_parent_security_policy.tierapp.path
   sequence_number = 666
   action          = "DROP"
-  direction       = "IN"
+  direction       = "IN_OUT"
   scope           = [nsxt_policy_group.tierapp_ns.path]
   logged          = true
   log_label       = "3tierapp-acnp"

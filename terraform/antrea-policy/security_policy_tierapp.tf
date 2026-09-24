@@ -30,9 +30,8 @@ resource "nsxt_policy_security_policy_rule" "allow_tierapp_frontend_to_backend" 
   policy_path     = var.policy_path
   sequence_number = 2
   action          = "ALLOW"
-  direction       = "IN"
-  source_groups   = [nsxt_policy_group.tierapp_frontend_svc.path]
-  scope           = [nsxt_policy_group.tierapp_backend.path]
+  direction       = "IN_OUT"
+  scope           = [nsxt_policy_group.tierapp_frontend_svc.path,nsxt_policy_group.tierapp_backend.path]
 
   service_entries {
     l4_port_set_entry {
@@ -40,4 +39,16 @@ resource "nsxt_policy_security_policy_rule" "allow_tierapp_frontend_to_backend" 
       destination_ports = ["5000"]
     }
   }
+}
+
+resource "nsxt_policy_security_policy_rule" "allow_tierapp_backend_to_db_ip" {
+  display_name       = "allow_3tierapp_backend_to_db_ip"
+  description        = "allow 3tierapp backend to 3tierapp-db-ip"
+  policy_path        = var.policy_path
+  sequence_number    = 3
+  action             = "ALLOW"
+  direction          = "OUT"
+  destination_groups = [nsxt_policy_group.tierapp_db_ip.path]
+  services           = [data.nsxt_policy_service.mysql.path]
+  scope              = [nsxt_policy_group.tierapp_backend.path]
 }
