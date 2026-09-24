@@ -33,7 +33,6 @@ resource "nsxt_policy_security_policy_rule" "allow_any_to_coredns_dns" {
   direction          = "OUT"
   destination_groups = [nsxt_policy_group.coredns.path]
   services           = [data.nsxt_policy_service.dns_tcp.path, data.nsxt_policy_service.dns_udp.path]
-  scope              = [nsxt_policy_group.coredns.path]
 }
 
 # Rule 2: allow pod-cidr-block -> any, DNS-TCP/DNS-UDP, inbound to coredns.
@@ -74,5 +73,4 @@ resource "nsxt_policy_security_policy_rule" "drop_coredns_dns" {
   action          = "DROP"
   direction       = "IN_OUT"
   services        = [data.nsxt_policy_service.dns_tcp.path, data.nsxt_policy_service.dns_udp.path]
-  scope           = [nsxt_policy_group.coredns.path]
 }
