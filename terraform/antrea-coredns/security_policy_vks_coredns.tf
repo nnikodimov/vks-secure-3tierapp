@@ -73,4 +73,6 @@ resource "nsxt_policy_security_policy_rule" "drop_coredns_dns" {
   action          = "DROP"
   direction       = "IN_OUT"
   services        = [data.nsxt_policy_service.dns_tcp.path, data.nsxt_policy_service.dns_udp.path]
+  logged          = true
+  log_label       = "coredns-acnp"
 }
