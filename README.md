@@ -8,9 +8,10 @@ independently:
 
 - [terraform/antrea_coredns/](terraform/antrea_coredns/) - fully standalone:
   owns its own groups (`coredns`, `pod-cidr-block`, `dns-server`) and its own
-  `vks-coredns` Infrastructure-category DFW policy, attached to a separate
-  Antrea cluster (`var.antrea_coredns_cluster_id`). Doesn't depend on, or get
-  depended on by, the other three modules. Applied first.
+  `vks-coredns` Infrastructure-category DFW policy, attached to its own Antrea
+  cluster attachment (`var.antrea_coredns_cluster_id`, currently the same
+  cluster as `var.antrea_cluster_id`). Doesn't depend on, or get depended on
+  by, the other three modules. Applied first.
 - [terraform/baseline/](terraform/baseline/) - creates the ACNP and 3tierapp-db
   parent policies, their groups, the Antrea cluster attachment, and locks
   both policies down with a default-deny DROP rule. Applied next.

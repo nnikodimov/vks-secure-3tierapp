@@ -5,10 +5,9 @@ nsx_username         = "admin"
 nsx_password         = "changeme"
 allow_unverified_ssl = false
 
-# Override only if reapplying against a different Antrea/Kubernetes cluster than
-# the one in the source export.
-antrea_cluster_id = "7dba6c18-766a-4c69-b084-04f1fb81bd94-prod01-y9x87-vks01-antrea"
+# Override only if reapplying against a different Antrea/Kubernetes cluster.
+antrea_cluster_id = "3f9be0cf-c57f-4537-932c-84d9ddfd431f-prod01-9lqzy-vks01-antrea"
 
-# Antrea/Kubernetes cluster the vks-coredns DFW policy is bound to (separate
-# cluster from antrea_cluster_id above).
+# Antrea/Kubernetes cluster the vks-coredns DFW policy is bound to. Currently
+# the same cluster as antrea_cluster_id above.
 antrea_coredns_cluster_id = "3f9be0cf-c57f-4537-932c-84d9ddfd431f-prod01-9lqzy-vks01-antrea"
