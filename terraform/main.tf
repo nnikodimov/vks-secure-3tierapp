@@ -2,7 +2,7 @@
 # Antrea cluster attachment (a different cluster than baseline's). No
 # dependency on the other modules; applied first.
 module "antrea_coredns" {
-  source = "./antrea-coredns"
+  source = "./antrea_coredns"
 
   antrea_cluster_id = var.antrea_coredns_cluster_id
 }
@@ -19,7 +19,7 @@ module "baseline" {
 # Amends the ACNP ALLOW rules onto the parent policy created above. Owns its
 # own frontend/backend groups.
 module "antrea_policy" {
-  source = "./antrea-policy"
+  source = "./antrea_policy"
 
   policy_path = module.baseline.tierapp_policy_path
 }
@@ -27,7 +27,7 @@ module "antrea_policy" {
 # Amends the database DFW ALLOW rule onto the parent policy created above.
 # Owns its own egress group; the destination db group comes from baseline.
 module "database_policy" {
-  source = "./database-policy"
+  source = "./database_policy"
 
   policy_path   = module.baseline.tierapp_db_policy_path
   db_group_path = module.baseline.tierapp_db_group_path

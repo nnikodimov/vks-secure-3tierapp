@@ -5,7 +5,7 @@ terraform {
     nsxt = {
       source = "vmware/nsxt"
       # nsxt_policy_parent_security_policy / nsxt_policy_security_policy_rule /
-      # nsxt_policy_security_policy_container_cluster (antrea-policy) are Beta
+      # nsxt_policy_security_policy_container_cluster (antrea_policy) are Beta
       # resources added in 3.11.0.
     }
   }

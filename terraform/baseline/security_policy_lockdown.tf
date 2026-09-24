@@ -1,6 +1,6 @@
 # Baseline: creates the ACNP and 3tierapp-db parent policies (plus their groups
 # and, for the ACNP, its Antrea cluster attachment), and locks both down with
-# a default-deny DROP rule. ../antrea-policy and ../database-policy are
+# a default-deny DROP rule. ../antrea_policy and ../database_policy are
 # applied afterwards, amending their ALLOW rules onto these same policies via
 # policy_path - they never create the policies themselves.
 #
@@ -31,7 +31,7 @@ resource "nsxt_policy_security_policy_container_cluster" "tierapp" {
 
 # Priority order matches the export's ascending sequenceNumber: this DROP
 # rule (499999) is the last ACNP rule - allow_tierapp_frontend (249999) and
-# allow_tierapp_frontend_to_backend (374999) in ../antrea-policy are evaluated
+# allow_tierapp_frontend_to_backend (374999) in ../antrea_policy are evaluated
 # first.
 
 resource "nsxt_policy_security_policy_rule" "lockdown_tierapp_namespace" {
@@ -60,7 +60,7 @@ resource "nsxt_policy_parent_security_policy" "tierapp_db" {
 
 # Priority order matches the export's ascending sequenceNumber: this DROP
 # rule (749999) comes after allow_tierapp_egress_to_database (499999) in
-# ../database-policy.
+# ../database_policy.
 
 resource "nsxt_policy_security_policy_rule" "lockdown_database" {
   display_name    = "lockdown_database"

@@ -6,7 +6,7 @@ instance ([terraform/provider.tf](terraform/provider.tf)) and calls four
 child modules, split out so each can be reasoned about and applied
 independently:
 
-- [terraform/antrea-coredns/](terraform/antrea-coredns/) - fully standalone:
+- [terraform/antrea_coredns/](terraform/antrea_coredns/) - fully standalone:
   owns its own groups (`coredns`, `pod-cidr-block`, `dns-server`) and its own
   `vks-coredns` Infrastructure-category DFW policy, attached to a separate
   Antrea cluster (`var.antrea_coredns_cluster_id`). Doesn't depend on, or get
@@ -14,14 +14,14 @@ independently:
 - [terraform/baseline/](terraform/baseline/) - creates the ACNP and 3tierapp-db
   parent policies, their groups, the Antrea cluster attachment, and locks
   both policies down with a default-deny DROP rule. Applied next.
-- [terraform/antrea-policy/](terraform/antrea-policy/) - amends the ACNP
+- [terraform/antrea_policy/](terraform/antrea_policy/) - amends the ACNP
   ALLOW rules (frontend/backend pod-to-pod traffic, and backend-to-db-ip MySQL
   traffic) onto the parent policy created in `baseline`.
-- [terraform/database-policy/](terraform/database-policy/) - amends the DFW
+- [terraform/database_policy/](terraform/database_policy/) - amends the DFW
   ALLOW rule (egress to the database tier) onto the parent policy created in
   `baseline`.
 
-`antrea-policy` and `database-policy` never create their own policies - they
+`antrea_policy` and `database_policy` never create their own policies - they
 attach rules to the policies from `baseline` via its outputs, which is what
 makes `baseline` apply before them. All four modules inherit the root's
 provider configuration automatically - none declares its own `provider`

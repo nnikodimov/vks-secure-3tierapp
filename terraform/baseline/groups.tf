@@ -6,8 +6,8 @@
 # wrong criteria here means the policy binds to the wrong workloads.
 #
 # Only the groups scoping the two lockdown rules live here - the groups used
-# by the ALLOW rules live alongside those rules in ../antrea-policy and
-# ../database-policy.
+# by the ALLOW rules live alongside those rules in ../antrea_policy and
+# ../database_policy.
 
 # Whole "3tierapp" Kubernetes namespace - used as the ANTREA policy's default-deny scope.
 resource "nsxt_policy_group" "tierapp_ns" {
