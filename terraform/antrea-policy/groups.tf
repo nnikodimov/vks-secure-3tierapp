@@ -52,10 +52,14 @@ resource "nsxt_policy_group" "tierapp_backend" {
   }
 }
 
-# IP-based group for the 3tierapp database.
+# IP-based group for the 3tierapp database. group_type = "ANTREA" is required
+# here even though this is a pure IP match - NSX rejects non-Antrea groups as
+# rule members on a policy attached to an Antrea container cluster (error
+# 610101).
 resource "nsxt_policy_group" "tierapp_db_ip" {
   display_name = "3tierapp-db-ip"
   description  = "3tierapp database IP."
+  group_type   = "ANTREA"
 
   criteria {
     ipaddress_expression {

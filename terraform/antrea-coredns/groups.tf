@@ -18,10 +18,14 @@ resource "nsxt_policy_group" "coredns" {
   }
 }
 
-# IP-based group covering the cluster's Pod CIDR block.
+# IP-based group covering the cluster's Pod CIDR block. group_type = "ANTREA"
+# is required here even though this is a pure IP match - NSX rejects
+# non-Antrea groups as rule members on a policy attached to an Antrea
+# container cluster (error 610101).
 resource "nsxt_policy_group" "pod_cidr_block" {
   display_name = "pod-cidr-block"
   description  = "Cluster Pod CIDR block."
+  group_type   = "ANTREA"
 
   criteria {
     ipaddress_expression {
@@ -30,10 +34,12 @@ resource "nsxt_policy_group" "pod_cidr_block" {
   }
 }
 
-# IP-based group for the upstream DNS server the cluster forwards to.
+# IP-based group for the upstream DNS server the cluster forwards to. See
+# note above on pod_cidr_block - group_type = "ANTREA" is required.
 resource "nsxt_policy_group" "dns_server" {
   display_name = "dns-server"
   description  = "Upstream DNS server."
+  group_type   = "ANTREA"
 
   criteria {
     ipaddress_expression {
