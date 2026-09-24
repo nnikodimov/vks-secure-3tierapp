@@ -23,3 +23,11 @@ module "database_policy" {
   policy_path   = module.baseline.tierapp_db_policy_path
   db_group_path = module.baseline.tierapp_db_group_path
 }
+
+# Standalone vks-coredns DFW policy - own groups, own parent policy, own
+# Antrea cluster attachment (a different cluster than baseline's).
+module "antrea_coredns" {
+  source = "./antrea-coredns"
+
+  antrea_cluster_id = var.antrea_coredns_cluster_id
+}

@@ -37,3 +37,13 @@ output "allow_tierapp_egress_to_database_path" {
   description = "NSX policy path of the allow_tierapp_egress_to_database rule"
   value       = module.database_policy.allow_tierapp_egress_to_database_path
 }
+
+output "vks_coredns_policy_path" {
+  description = "NSX policy path of the vks-coredns DFW parent security policy"
+  value       = module.antrea_coredns.vks_coredns_policy_path
+}
+
+output "vks_coredns_container_cluster_span_path" {
+  description = "NSX policy path of the vks-coredns <-> Antrea cluster association"
+  value       = module.antrea_coredns.vks_coredns_container_cluster_span_path
+}
