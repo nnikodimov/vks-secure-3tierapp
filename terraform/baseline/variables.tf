@@ -6,5 +6,5 @@ variable "antrea_cluster_id" {
     against a different cluster/environment.
   EOT
   type        = string
-  default     = "7dba6c18-766a-4c69-b084-04f1fb81bd94-prod01-y9x87-vks01-antrea"
+  default     = "3f9be0cf-c57f-4537-932c-84d9ddfd431f-prod01-9lqzy-vks01-antrea"
 }
